@@ -1,0 +1,362 @@
+/*
+Theme Name: Portfolio Nicolas Heim
+Theme URI:
+Author: Nicolas Heim
+Description: Thème portfolio personnalisé
+Version: 1.0
+*/
+
+
+
+/*Police */
+
+@font-face {
+  font-family: "Dancing Script";
+  src: url("assets/fonts/DancingScript-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Réglages de base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background:#000; color:#fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+/* Section hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background:#000; /* sécurité si l'image tarde */
+}
+
+/* Fond noir (optionnel, déjà noir) */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: #030303;
+  z-index: 0;
+}
+
+/* Image qui descend */
+.hero__image-wrap {
+  position: absolute;
+  top: -100%;           /* départ hors écran */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 1200px);
+  aspect-ratio: 16/9;   /* évite le reflow pendant le chargement */
+  z-index: 1;
+  animation: slideDown 1.6s ease-out forwards;
+  animation-delay: 200ms;
+}
+
+/* L'image occupe le conteneur, sans crop */
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* toujours entièrement visible */
+}
+
+/* Titre mot par mot */
+.hero__text {
+   position: absolute;
+    font-family: "Dancing Script", cursive !important;
+    color: #E3AB53;
+    top:25%;
+    left: 70%;
+    bottom: clamp(6vh, 10vh, 14vh);
+    transform: translateX(-50%);
+    margin: 0;
+    text-align: left;      
+  display: inline-block;
+    line-height: 1.15;
+    font-weight: 400;
+    font-size: clamp(22px, 4vw, 56px);
+    letter-spacing: 0; /* tu peux tester -0.01em ou 0.01em */
+    z-index: 2;
+    padding-right: .25ch;
+  /* curseur dactylo discret */
+  padding-right: .25ch;
+  white-space: pre-line;
+}
+
+/* Animation descente */
+@keyframes slideDown {
+  to { top: 8vh; } /* ajuste la position finale ici */
+}
+
+/* Accessibilité: réduit les animations si demandé */
+@media (prefers-reduced-motion: reduce) {
+  .hero__image-wrap { animation: none; top: 8vh; }
+}
+
+/* Responsive fin: sécurités */
+@media (max-width: 480px) {
+  .hero__image-wrap { width: 94vw; }
+  .hero__text { bottom: 8vh; }
+}
+
+/* HEADER */
+.site-header {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  padding: 15px 25px;
+  background: transparent;
+}
+
+.site-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo img {
+  height: 45px;
+  width: auto;
+}
+
+/* HAMBURGER */
+.hamburger {
+  width: 32px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100000;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* MENU PLEIN ÉCRAN */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: none;                /* masqué */
+  justify-content: center;
+  align-items: center;
+  z-index: 99998;
+  overflow: hidden;
+}
+
+/* Image plein écran */
+.menu-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+/* Liens */
+.menu-links {
+  position: relative;
+  z-index: 2;
+}
+
+.primary-menu-overlay {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.primary-menu-overlay li {
+  margin: 20px 0;
+}
+
+.primary-menu-overlay a {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* OUVERTURE */
+body.menu-open .menu-overlay {
+  display: flex;
+}
+
+/* Effet hamburger → croix */
+body.menu-open .hamburger span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+body.menu-open .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+body.menu-open .hamburger span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* décale le hero vers le bas pour ne pas être caché par le header */
+
+.hero {
+  padding-top: 60px;
+}
+
+.page-main {
+  max-width: 900px;
+  margin: 80px auto 60px;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.page-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* ===== ARCHIVE PROJETS ===== */
+
+.projects-archive {
+  max-width: 1100px;
+  margin: 100px auto 80px;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.projects-archive__title {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 10px;
+}
+
+.projects-archive__intro {
+  opacity: 0.8;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+/* Grille */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background: #111;
+  border: 1px solid #222;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.project-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card__thumb img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.project-card__title {
+  font-size: 18px;
+  margin: 15px 18px 6px;
+}
+
+.project-card__excerpt {
+  font-size: 14px;
+  margin: 0 18px 12px;
+  opacity: 0.85;
+}
+
+.project-card__more {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0 18px 16px;
+  opacity: 0.8;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-color: #444;
+}
+
+/* Pagination */
+.projects-archive__pagination {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* ===== SINGLE PROJET ===== */
+
+.project-single {
+  max-width: 900px;
+  margin: 100px auto 80px;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.project-single__back a,
+.project-single__back-link {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #aaa;
+  text-decoration: none;
+}
+
+.project-single__back a:hover,
+.project-single__back-link:hover {
+  color: #fff;
+}
+
+.project-single__title {
+  font-size: clamp(30px, 4.5vw, 44px);
+  margin: 10px 0;
+}
+
+.project-single__subtitle {
+  font-size: 16px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.project-single__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 20px 0 30px;
+}
+
+.project-single__content {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.project-single__content p {
+  margin-bottom: 1.1em;
+}
+
+.project-single__footer {
+  margin-top: 40px;
+  border-top: 1px solid #222;
+  padding-top: 20px;
+}
+
+
