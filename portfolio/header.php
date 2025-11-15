@@ -14,8 +14,11 @@
 
     <!-- Logo -->
     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="Logo">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo_nh.svg" alt="Logo">
     </a>
+
+    <!-- Texte de la barre -->
+    <span class="site-header-text">Web & IT</span>
 
     <!-- Hamburger -->
     <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
