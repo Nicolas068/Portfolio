@@ -11,6 +11,15 @@ Version: 1.0
 /*Police */
 
 @font-face {
+  font-family: "Cinzel";
+  src: url("assets/fonts/Cinzel-VariableFont.woff2") format("woff2-variations"),
+       url("assets/fonts/Cinzel-VariableFont.woff2") format("woff2");
+  font-weight: 100 900;  
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Dancing Script";
   src: url("assets/fonts/DancingScript-Regular.woff2") format("woff2");
   font-weight: 400;
@@ -18,15 +27,23 @@ Version: 1.0
   font-display: swap;
 }
 
+
 /* Réglages de base */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body { margin: 0; background:#000; color:#fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
 
+
+body > * {
+  width: min(90vw, 1200px);  /* largeur unifiée sur tout le site */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Section hero */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   overflow: hidden;
   isolation: isolate;
   background:#000; /* sécurité si l'image tarde */
@@ -62,26 +79,35 @@ body { margin: 0; background:#000; color:#fff; font-family: system-ui, -apple-sy
 
 /* Titre mot par mot */
 .hero__text {
-   position: absolute;
-    font-family: "Dancing Script", cursive !important;
-    color: #E3AB53;
-    top:25%;
-    left: 70%;
-    bottom: clamp(6vh, 10vh, 14vh);
-    transform: translateX(-50%);
-    margin: 0;
-    text-align: left;      
+  position: absolute;
+  font-family: "Cinzel", cursive;
+  color: #E3AB53;
+  top: 32%;
+  left: 68%;
+  transform: translateX(-50%);
+  margin: 0;
+  text-align: left;
   display: inline-block;
-    line-height: 1.15;
-    font-weight: 400;
-    font-size: clamp(22px, 4vw, 56px);
-    letter-spacing: 0; /* tu peux tester -0.01em ou 0.01em */
-    z-index: 2;
-    padding-right: .25ch;
-  /* curseur dactylo discret */
-  padding-right: .25ch;
+
+  line-height: 1.15;
+  font-weight: 400;
+  font-size: clamp(2px, 4vw, 26px);
   white-space: pre-line;
+  letter-spacing: 0;
+  z-index: 2;
+
+  padding: 0;            /* pas de padding pour éviter un cadre fantôme */
+  border: none;          /* AUCUNE bordure au départ */
+  transition: border 0.4s ease, padding 0.4s ease;
 }
+
+/* La bordure apparaît uniquement après le mot par mot */
+.hero__text.show-border {
+  padding: 8px 12px;                  /* ajoute le padding en même temps que la bordure */
+  border: 1px solid #E3AB53;          /* vraie bordure visible */
+}
+
+
 
 /* Animation descente */
 @keyframes slideDown {
@@ -99,22 +125,30 @@ body { margin: 0; background:#000; color:#fff; font-family: system-ui, -apple-sy
   .hero__text { bottom: 8vh; }
 }
 
-.hero__image-bottom {
-  position: absolute;
-  bottom: -100%;                 /* démarre hors écran */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(90vw, 1200px);
-  aspect-ratio: 16/9;
-  z-index: 2;                     /* passe sous l'image du hero */
-  animation: slideUpToHero 1.4s ease-out forwards;
+.hero__subtext {
+   position: relative;
+   font-family: "Cinzel", cursive;
+    color: #E3AB53;
+  z-index: 10;
+  margin-top: calc(min(90vw, 1200px) * 9/16 + 20px);
+  font-size: 2rem;
+  opacity: 1;
+  text-align: center;
+  width: 100%;
+  
 }
 
-.hero__image-bottom img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.second-bg {
+  width: min(90vw, 1200px);
+  margin: 80px auto;
 }
+
+.second-bg-img {
+  display: block;
+  width: 100%;       
+  height: auto;       
+}
+
 /* HEADER */
 .site-header {
   position:fixed;
@@ -139,7 +173,7 @@ body { margin: 0; background:#000; color:#fff; font-family: system-ui, -apple-sy
 
 .site-header-text {
   color: #E3AB53;
-  font-family: "Dancing Script", cursive;
+  font-family: "Cinzel", cursive;
   font-size: 30px;
   margin-right: 20px;
   letter-spacing: 0.05em;
@@ -248,6 +282,17 @@ body.menu-open .hamburger span:nth-child(3) {
 .page-title {
   font-size: 32px;
   margin-bottom: 20px;
+}
+
+.presentation {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.presentation.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ===== ARCHIVE PROJETS ===== */
