@@ -34,7 +34,7 @@
 <div class="menu-overlay" id="menu-overlay">
 
   <!-- Image de fond -->
-  <img src="<?php echo get_template_directory_uri(); ?>/assets/img/menu-bg.jpg" alt="" class="menu-bg">
+  <img src="<?php echo get_template_directory_uri(); ?>/assets/img/light-bulbs.jpg" alt="" class="menu-bg">
 
   <!-- Liens du menu -->
   <nav class="menu-links">

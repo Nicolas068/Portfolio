@@ -1,68 +1,107 @@
 (function () {
 
-  const image = document.querySelector(".hero__image-wrap");
-  const h1 = document.querySelector("#hero-text");
-  const p = document.querySelector(".hero__subtext");
-  const presentation = document.querySelector(".presentation");
-
-  if (!image || !h1 || !p || !presentation) return;
-
-  // Créer un span interne pour le texte animé
-  const h1Span = document.createElement("span");
-  const pSpan = document.createElement("span");
-
-  h1.innerHTML = "";
-  p.innerHTML = "";
-
-  h1.appendChild(h1Span);
-  p.appendChild(pSpan);
-
-  // Parse texte
-  const parseWords = el => {
-    let txt = (el.dataset.words || "").trim();
-    return txt.replace(/\\n/g, "<br>").split(/\s+/);
-  };
-
-  const wordsH1 = parseWords(h1);
-  const wordsP = parseWords(p);
-
-  const WORD_DELAY = 380;
-
-  // Fonction mot par mot (sur le span)
-  function typeWords(el, words, onDone) {
-    let i = 0;
-    el.innerHTML = "";
-
-    function step() {
-      if (i >= words.length) {
-        if (typeof onDone === "function") onDone();
-        return;
-      }
-      el.innerHTML += (i ? " " : "") + words[i];
-      i++;
-      setTimeout(step, WORD_DELAY);
-    }
-
-    step();
+  /* ===========================
+     MENU HAMBURGER
+  ============================ */
+  const hamburger = document.getElementById("hamburger");
+  if (hamburger) {
+    hamburger.addEventListener("click", () => {
+      document.body.classList.toggle("menu-open");
+    });
   }
 
-  // 1. Attendre la fin de l'animation de l'image
-  image.addEventListener("animationend", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
-    // 2. H1 mot par mot dans le SPAN
-    typeWords(h1Span, wordsH1, () => {
+    /* ===========================
+       ANIMATION HERO MOT PAR MOT
+    ============================ */
 
-      // → Cadre après FIN du mot-par-mot
-      h1.classList.add("show-border");
+    const image = document.querySelector(".hero__image-wrap");
+    const h1 = document.querySelector("#hero-text");
+    const p = document.querySelector(".hero__subtext");
+    const presentation = document.querySelector(".presentation");
 
-      // 3. Sous-texte
-      typeWords(pSpan, wordsP, () => {
+    if (!image || !h1 || !p || !presentation) return;
 
-        // 4. Section présentation
-        presentation.classList.add("show");
-      });
-    });
+    const h1Span = document.createElement("span");
+    const pSpan = document.createElement("span");
+    h1.innerHTML = "";
+    p.innerHTML = "";
+    h1.appendChild(h1Span);
+    p.appendChild(pSpan);
 
-  }, { once: true });
+    function splitHTMLWords(str) {
+      str = str.replace(/\\n/g, "<br>");
+      const words = [];
+      let buffer = "";
+      let insideTag = false;
 
+      for (let i = 0; i < str.length; i++) {
+        const char = str[i];
+
+        if (char === "<") insideTag = true;
+        if (char === ">") insideTag = false;
+
+        if (char === " " && !insideTag) {
+          if (buffer.trim() !== "") words.push(buffer);
+          buffer = "";
+        } else {
+          buffer += char;
+        }
+      }
+
+      if (buffer.trim() !== "") words.push(buffer);
+
+      return words;
+    }
+
+    const wordsH1 = splitHTMLWords(h1.dataset.words || "");
+    const wordsP = splitHTMLWords(p.dataset.words || "");
+    const WORD_DELAY = 380;
+
+    function typeWords(el, words, onDone) {
+      let i = 0;
+      el.innerHTML = "";
+
+      function step() {
+        if (i >= words.length) {
+          if (onDone) onDone();
+          return;
+        }
+
+        el.innerHTML += (i > 0 ? " " : "") + words[i];
+        i++;
+        setTimeout(step, WORD_DELAY);
+      }
+
+      step();
+    }
+
+    image.addEventListener(
+      "animationend",
+      () => {
+        typeWords(h1Span, wordsH1, () => {
+          h1.classList.add("show-border");
+          typeWords(pSpan, wordsP, () => {
+            presentation.classList.add("show");
+          });
+        });
+      },
+      { once: true }
+    );
+
+    /* ===========================
+       AMPOULE CONTACT (FIXÉ)
+    ============================ */
+
+    const container = document.getElementById("ampoule-container");
+    if (container) {
+      fetch("/wp-content/themes/portfolio/assets/ampoule_anime_colored.svg")
+        .then((r) => r.text())
+        .then((svg) => {
+          container.innerHTML = svg;
+          container.querySelector("svg").classList.add("presentation__icon-svg");
+        });
+    }
+  });
 })();

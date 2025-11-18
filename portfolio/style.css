@@ -19,14 +19,6 @@ Version: 1.0
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Dancing Script";
-  src: url("assets/fonts/DancingScript-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 
 /* Réglages de base */
 * { box-sizing: border-box; }
@@ -81,7 +73,7 @@ body > * {
 .hero__text {
   position: absolute;
   font-family: "Cinzel", cursive;
-  color: #E3AB53;
+  color: #ffffff;
   top: 32%;
   left: 68%;
   transform: translateX(-50%);
@@ -96,15 +88,19 @@ body > * {
   letter-spacing: 0;
   z-index: 2;
 
-  padding: 0;            /* pas de padding pour éviter un cadre fantôme */
-  border: none;          /* AUCUNE bordure au départ */
+  padding: 0;            
+  border: none;          
   transition: border 0.4s ease, padding 0.4s ease;
+}
+
+.hero__text strong {
+  font-weight: 800; 
 }
 
 /* La bordure apparaît uniquement après le mot par mot */
 .hero__text.show-border {
-  padding: 8px 12px;                  /* ajoute le padding en même temps que la bordure */
-  border: 1px solid #E3AB53;          /* vraie bordure visible */
+  padding: 8px 12px;                  
+  border: 1px solid #E3AB53;          
 }
 
 
@@ -157,7 +153,7 @@ body > * {
   right: 0;
   z-index: 99999;
   padding: 0px 25px;
-  background: transparent;
+  background: #030303;
 }
 
 .site-header__inner {
@@ -204,9 +200,9 @@ body > * {
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: #000;
   display: none;                /* masqué */
   justify-content: center;
+   background: #000;
   align-items: center;
   z-index: 99998;
   overflow: hidden;
@@ -227,6 +223,7 @@ body > * {
 .menu-links {
   position: relative;
   z-index: 2;
+  margin-top: -144px;
 }
 
 .primary-menu-overlay {
@@ -241,11 +238,11 @@ body > * {
 }
 
 .primary-menu-overlay a {
+  font-family: "Cinzel", cursive;
+  color: #E3AB53;
   font-size: 2rem;
   font-weight: 700;
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
+  text-decoration: none; 
 }
 
 /* OUVERTURE */
@@ -294,6 +291,58 @@ body.menu-open .hamburger span:nth-child(3) {
   opacity: 1;
   transform: translateY(0);
 }
+
+.presentation__title {
+  font-family: "Cinzel", cursive;
+    color: #E3AB53;
+}
+
+/* Conteneur centré */
+.presentation__icon {
+  text-align: center;
+  margin-top: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.presentation__icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+  overflow: visible;     /* ← indispensable */
+}
+
+.presentation__icon-text {
+  font-family: "Cinzel", cursive;
+  color: #E3AB53;
+  font-size: 1.2rem;
+}
+
+/* Lien vers /contact */
+.presentation__icon-link {
+  display: inline-block;
+}
+
+/* SVG animé */
+.presentation__icon-svg {
+  width: 40px;        /* taille de l’ampoule */
+  height: auto;
+  fill: #E3AB53;
+   display: block;
+  animation: vibrate 3.2s ease-in-out 2s infinite;
+}
+
+@keyframes vibrate {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, 2px); }
+  40%  { transform: translate(2px, -2px); }
+  60%  { transform: translate(-2px, -1px); }
+  80%  { transform: translate(1px, 2px); }
+  100% { transform: translate(0); }
+}
+
 
 /* ===== ARCHIVE PROJETS ===== */
 
