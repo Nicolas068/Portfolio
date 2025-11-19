@@ -21,6 +21,7 @@ add_action('after_setup_theme', function () {
 // CPT 
 
 add_action('init', function () {
+
   $labels = [
     'name' => 'Projets',
     'singular_name' => 'Projet',
@@ -34,12 +35,13 @@ add_action('init', function () {
     'menu_name' => 'Projets',
   ];
 
-  register_post_type('projet', [
+  register_post_type('projets', [
     'labels' => $labels,
     'public' => true,
-    'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+    'supports' => ['title', 'editor', 'thumbnail'],
     'has_archive' => true,
     'rewrite' => ['slug' => 'projets'],
     'show_in_rest' => true,
   ]);
+
 });

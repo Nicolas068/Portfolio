@@ -20,6 +20,7 @@
     const h1 = document.querySelector("#hero-text");
     const p = document.querySelector(".hero__subtext");
     const presentation = document.querySelector(".presentation");
+    const mesServices = document.querySelector(".mes_services"); // ← ajouté
 
     if (!image || !h1 || !p || !presentation) return;
 
@@ -83,7 +84,19 @@
         typeWords(h1Span, wordsH1, () => {
           h1.classList.add("show-border");
           typeWords(pSpan, wordsP, () => {
+
+            /* 
+             * Quand la présentation apparaît,
+             * on fait ensuite apparaître .mes_services
+             */
             presentation.classList.add("show");
+
+            if (mesServices) {
+              setTimeout(() => {
+                mesServices.classList.add("is-visible");
+              }, 300); // délai à ajuster si besoin
+            }
+
           });
         });
       },
@@ -104,4 +117,31 @@
         });
     }
   });
+  /* ===========================
+   ANIMATION SCROLL SERVICES
+=========================== */
+
+/* ===========================
+   ANIMATION SCROLL SERVICES (RESET)
+=========================== */
+
+const serviceBlocks = document.querySelectorAll('.service-block');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+      // L’élément entre dans le viewport → on joue l'animation
+      entry.target.classList.add('visible');
+    } else {
+      // L’élément sort du viewport → on remet l’animation à zéro
+      entry.target.classList.remove('visible');
+    }
+
+  });
+}, { threshold: 0.3 });
+
+serviceBlocks.forEach(block => observer.observe(block));
+
+
 })();

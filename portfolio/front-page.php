@@ -36,7 +36,7 @@
       Passionné par la création de solutions web sur mesure, je conçois des sites WordPress modernes, performants et optimisés. Mon objectif est de proposer une expérience unique, pensée pour chaque projet.
 Après une première carrière réussie dans les systèmes d’information, cinq ans comme technicien et deux ans comme responsable SI , j’ai choisi de me réorienter vers le développement WordPress. Ce choix est né d’un besoin essentiel : retrouver la dimension créative qui me manquait dans l’informatique traditionnelle.
 Le développement WordPress s’est imposé comme une évidence, alliant technique, design et liberté de création. Aujourd’hui, je mets ces compétences au service de projets professionnels et personnalisés.
-Vous avez une question, un projet oû une idée ? Contactez-moi.
+Vous avez une question, un projet ou une idée ? 
  </p>
  <div class="presentation__icon-row">
 
@@ -47,8 +47,8 @@ Vous avez une question, un projet oû une idée ? Contactez-moi.
     <svg class="presentation__icon-svg" xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
 
-      <g transform="translate(0,512) scale(0.1,-0.1)"
-         fill="#E3AB53" stroke="none">
+     <g transform="translate(0,512) scale(0.1,-0.1)"
+   fill="#E3AB53" stroke="none">
 
         <path d="M2501 5014 c-19 -25 -21 -40 -21 -205 0 -111 4 -187 11 -203 25 -53
 110 -57 136 -5 9 16 13 81 13 205 0 168 -1 183 -21 208 -16 20 -29 26 -59 26
@@ -100,6 +100,9 @@ Vous avez une question, un projet oû une idée ? Contactez-moi.
 </div>
 
 </section>
+<section>
+  <h2 class="mes_services"> Mes services </h2>
+</section>
 
 
 <!-- ==========================
@@ -111,6 +114,68 @@ Vous avez une question, un projet oû une idée ? Contactez-moi.
     alt=""
     class="second-bg-img"
   >
+
+  <div class="services-scroll">
+
+    <div class="service-block from-left">
+      <h3>WordPress</h3>
+      <ul>
+        <li>Création de site WordPress</li>
+        <li>Refonte de site</li>
+        <li>Développement sur mesure</li>
+        <li>Optimisation des performances</li>
+        <li>Maintenance et mise à jour</li>
+        <li>Hébergement</li>
+        <li>Référencemment</li>
+      </ul>
+    </div>
+
+    <div class="service-block from-right">
+      <h3>Informatique</h3>
+      <ul>
+        <li>Maintenance informatique</li>
+        <li>Assistance utilisateurs</li>
+        <li>Gestion de parc</li>
+        <li>Sécurisation de postes</li>
+        <li>Installation & configuration</li>
+        <li>Formation personnalisé</li>
+        <li>Conseil et bonne pratique</li>
+      </ul>
+    </div>
+
+  </div>
 </section>
+<!-- Section projet -->
+
+<section class="projects-section">
+    <h2 class="projects-title">Mes projets</h2>
+
+    <div class="projects-grid">
+        <?php
+        $args = array(
+            'post_type'      => 'projets', // nom exact du CPT
+            'posts_per_page' => -1,
+            'orderby'        => 'date',
+            'order'          => 'DESC'
+        );
+
+        $projects = new WP_Query($args);
+
+        if ($projects->have_posts()) :
+            while ($projects->have_posts()) : $projects->the_post();
+
+                get_template_part('template-parts/project-card');
+
+            endwhile;
+            wp_reset_postdata();
+        else :
+            echo '<p>Aucun projet disponible pour le moment.</p>';
+        endif;
+        ?>
+    </div>
+</section>
+
+
+
 
 <?php get_footer(); ?>
