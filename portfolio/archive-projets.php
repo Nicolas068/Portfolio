@@ -20,7 +20,7 @@
                     <a href="<?php the_permalink(); ?>">
 
                         <?php if (has_post_thumbnail()) : ?>
-                            <?php the_post_thumbnail('medium'); ?>
+                            <?php the_post_thumbnail('project_square'); ?>
                         <?php endif; ?>
 
                         <h3 class="project-title"><?php the_title(); ?></h3>

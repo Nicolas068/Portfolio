@@ -150,11 +150,11 @@ Vous avez une question, un projet ou une idée ?
 <section class="projects-section">
     <h2 class="projects-title">Mes projets</h2>
 
-    <div class="projects-grid">
+    <div id="projects-grid">
         <?php
         $args = array(
-            'post_type'      => 'projets', // nom exact du CPT
-            'posts_per_page' => -1,
+            'post_type'      => 'projets',
+            'posts_per_page' => 6,          // <-- seulement 6 au départ
             'orderby'        => 'date',
             'order'          => 'DESC'
         );
@@ -163,9 +163,7 @@ Vous avez une question, un projet ou une idée ?
 
         if ($projects->have_posts()) :
             while ($projects->have_posts()) : $projects->the_post();
-
                 get_template_part('template-parts/project-card');
-
             endwhile;
             wp_reset_postdata();
         else :
@@ -173,7 +171,12 @@ Vous avez une question, un projet ou une idée ?
         endif;
         ?>
     </div>
+
+    <div class="load-more-container">
+        <button id="load-more-projets" data-page="1">Charger plus</button>
+    </div>
 </section>
+
 
 
 

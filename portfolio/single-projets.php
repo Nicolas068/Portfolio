@@ -1,61 +1,98 @@
 <?php get_header(); ?>
 
-<main id="site-content" class="site-main single-project">
+<main id="site-content" class="single-projet">
 
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+
+    <?php
+    $annee       = SCF::get('-annee');
+    $description = SCF::get('-description');
+    $lien        = SCF::get('-lien');
+    ?>
+
+    <section class="projet-top">
+
+        <div class="projet-info">
+            <h1><?php the_title(); ?></h1>
+
+            <?php if ( $annee ) : ?>
+                <p class="projet-annee"><?php echo esc_html( $annee ); ?></p>
+            <?php endif; ?>
+
+            <?php if ( $description ) : ?>
+                <p class="projet-desc"><?php echo esc_html( $description ); ?></p>
+            <?php endif; ?>
+
+            <?php if ( $lien ) : ?>
+                <a href="<?php echo esc_url( $lien ); ?>" class="projet-lien" target="_blank">
+                    Voir le projet
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <div class="projet-image">
+            <?php the_post_thumbnail('large'); ?>
+        </div>
+
+    </section>
+
+    <hr class="projet-separateur">
+
+    <!-- 2 AUTRES PROJETS -->
+    <section class="projets-suggestions">
+
+        <h2>Autres projets</h2>
+
+        <div class="suggestions-grid">
 
         <?php
-        $annee       = SCF::get('projet_annee');
-        $description = SCF::get('projet_description');
-        $lien        = SCF::get('projet_lien');
+        $args = [
+            'post_type'      => 'projet',
+            'posts_per_page' => 2,
+            'post__not_in'   => [ get_the_ID() ],
+            'orderby'        => 'rand'
+        ];
+        $suggestions = new WP_Query($args);
 
-        // Utilisation de ta même image (si tu veux 2 photos identiques en bas)
-        $image_main = get_the_post_thumbnail(null, 'large');
+        if ( $suggestions->have_posts() ) :
+            while ( $suggestions->have_posts() ) :
+                $suggestions->the_post();
         ?>
 
-        <article class="single-projet-wrapper">
+            <article class="suggestion-card">
+    <a href="<?php the_permalink(); ?>">
 
-            <!-- CONTENEUR TITRE + IMAGE PRINCIPALE -->
-            <div class="single-projet-top">
+        <div class="suggestion-image">
+            <?php if (has_post_thumbnail()) : ?>
+                <?php the_post_thumbnail('medium'); ?>
+            <?php endif; ?>
+        </div>
 
-                <!-- COLONNE GAUCHE = TITRE + INFOS -->
-                <div class="single-projet-info">
-                    <h1 class="single-projet-title"><?php the_title(); ?></h1>
+        <h3><?php the_title(); ?></h3>
 
-                    <?php if ($annee) : ?>
-                        <p class="single-projet-year"><strong>Année :</strong> <?= esc_html($annee); ?></p>
-                    <?php endif; ?>
+    </a>
+</article>
 
-                    <?php if ($description) : ?>
-                        <p class="single-projet-description"><?= esc_html($description); ?></p>
-                    <?php endif; ?>
+        <?php
+            endwhile;
+            wp_reset_postdata();
+        endif;
+        ?>
 
-                    <?php if ($lien) : ?>
-                        <p class="single-projet-link">
-                            <a href="<?= esc_url($lien); ?>" target="_blank">Voir le site</a>
-                        </p>
-                    <?php endif; ?>
-                </div>
+        </div>
 
-                <!-- COLONNE DROITE = IMAGE PRINCIPALE -->
-                <div class="single-projet-main-image">
-                    <?= $image_main; ?>
-                </div>
+        <div class="projet-pagination">
+            <?php
+            the_post_navigation([
+                'prev_text' => '← Projet précédent',
+                'next_text' => 'Projet suivant →'
+            ]);
+            ?>
+        </div>
 
-            </div>
+    </section>
 
-            <!-- TRAIT DE SÉPARATION -->
-            <hr class="single-projet-separator">
-
-            <!-- DEUX PHOTOS EN DESSOUS -->
-            <div class="single-projet-gallery">
-                <div class="gallery-item"><?= $image_main; ?></div>
-                <div class="gallery-item"><?= $image_main; ?></div>
-            </div>
-
-        </article>
-
-    <?php endwhile; endif; ?>
+<?php endwhile; endif; ?>
 
 </main>
 
