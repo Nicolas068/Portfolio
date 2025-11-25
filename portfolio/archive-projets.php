@@ -1,57 +1,18 @@
 <?php get_header(); ?>
 
-<main id="site-content" class="site-main">
+<section class="projects-section">
+    <h2 class="projects-title">Mes projets</h2>
 
-    <h1 class="archive-title">Mes projets</h1>
-
-    <?php if ( have_posts() ) : ?>
-        <div class="projects-grid">
-
-            <?php while ( have_posts() ) : the_post(); ?>
-
-                <?php
-                $annee       = SCF::get('projet_annee');
-                $description = SCF::get('projet_description');
-                $lien        = SCF::get('projet_lien');
-                ?>
-
-                <article class="project-card">
-
-                    <a href="<?php the_permalink(); ?>">
-
-                        <?php if (has_post_thumbnail()) : ?>
-                            <?php the_post_thumbnail('project_square'); ?>
-                        <?php endif; ?>
-
-                        <h3 class="project-title"><?php the_title(); ?></h3>
-
-                        <?php if ($annee) : ?>
-                            <p class="project-year">Année : <?php echo esc_html($annee); ?></p>
-                        <?php endif; ?>
-
-                        <?php if ($description) : ?>
-                            <p class="project-description">
-                                <?php echo esc_html($description); ?>
-                            </p>
-                        <?php endif; ?>
-
-                        <?php if ($lien) : ?>
-                            <p class="project-link">
-                                <span>Voir le site</span>
-                            </p>
-                        <?php endif; ?>
-
-                    </a>
-                </article>
-
+    <div id="projects-grid">
+        <?php if (have_posts()) : ?>
+            <?php while (have_posts()) : the_post(); ?>
+                <?php get_template_part('template-parts/project-card'); ?>
             <?php endwhile; ?>
+        <?php else : ?>
+            <p>Aucun projet pour le moment.</p>
+        <?php endif; ?>
+    </div>
 
-        </div>
-
-    <?php else : ?>
-        <p>Aucun projet disponible.</p>
-    <?php endif; ?>
-
-</main>
+</section>
 
 <?php get_footer(); ?>

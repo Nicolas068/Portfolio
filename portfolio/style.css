@@ -212,7 +212,7 @@ body > * {
   justify-content: center;
    background: #000;
   align-items: center;
-  z-index: 99998;
+  z-index: 99990;
   overflow: hidden;
 }
 
@@ -298,6 +298,8 @@ body.menu-open .hamburger span:nth-child(3) {
 .presentation.show {
   opacity: 1;
   transform: translateY(0);
+  background: #111;
+  padding: 30px 20px 30px 30px;
 }
 
 .presentation__title {
@@ -341,7 +343,10 @@ body.menu-open .hamburger span:nth-child(3) {
   fill: #ffffff;
    display: block;
   animation: vibrate 3.2s ease-in-out 2s infinite;
-  padding-top: 150%;
+  padding-top: 190%;
+  stroke: #E3AB53;
+  stroke-width: 10;   /* diminue l’épaisseur */
+  fill: none;         /* retire le remplissage */
 }
 
 @keyframes vibrate {
@@ -437,8 +442,8 @@ body.menu-open .hamburger span:nth-child(3) {
 
 
 /* ============================
-   PROJETS — SECTION & GRID
-   ============================ */
+   SECTION PROJETS
+============================ */
 
 .projects-section {
   padding: 80px 0;
@@ -448,34 +453,24 @@ body.menu-open .hamburger span:nth-child(3) {
 
 .projects-title {
   text-align: center;
+  font-family: "Cinzel", cursive;
   font-size: 2.4rem;
   margin-bottom: 50px;
   color: #E3AB53;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  padding: 0 40px;
-}
 
-#projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
+/* ============================
+   GRID UNIFIÉE (front, archive, suggestions)
+============================ */
 
-.projects-grid,
 #projects-grid,
+.projects-grid,
 .suggestions-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-  justify-items: center;
-
-  padding-left: 10px;   /* petite marge à gauche */
-  padding-right: 10px;  /* petite marge à droite */
+  padding: 0 10px;
 }
 
 .load-more-container {
@@ -488,6 +483,7 @@ body.menu-open .hamburger span:nth-child(3) {
   border: 1px solid #E3AB53;
   background: transparent;
   color: #E3AB53;
+  font-family: "Cinzel", cursive;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -498,31 +494,17 @@ body.menu-open .hamburger span:nth-child(3) {
   color: #000;
 }
 
-.project-card img,
-.suggestion-card img,
-.projet-image img {
-  padding: 6px; /* empêcher l’image de toucher le border */
-  box-sizing: border-box;
-}
 
-/* PROJECT CARD  */
-
-/* =====================================
-   PROJECT CARD — Version propre
-===================================== */
+/* ============================
+   CARD UNIFIÉE
+============================ */
 
 .project-card {
-  width: 96%;
-  aspect-ratio: 1 / 1;            /* Card carrée */
-  border: 1px solid #E3AB53;
+  width: 100%;
   border-radius: 12px;
-  overflow: hidden;
-  background: #000;
-  margin: 0 auto;
-  position: relative;             /* nécessaire pour le titre */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden; 
+  background: transparent;
+  position: relative;
   transition: transform .3s ease;
 }
 
@@ -530,46 +512,39 @@ body.menu-open .hamburger span:nth-child(3) {
   transform: translateY(-6px);
 }
 
-/* Conteneur interne qui protège la bordure */
-.project-card__inner {
+.project-card a {
+  display: block;
   width: 100%;
   height: 100%;
-  padding: 6px;                   /* laisse visible le border */
-  box-sizing: border-box;
 }
 
-/* Image interne (unique et propre) */
-.project-card__inner img {
+/* Wrapper image */
+.project-card__imgwrap {
+  width: 100%;
+  aspect-ratio: auto; 
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Image */
+.project-card__imgwrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;              /* remplit réellement le cadre */
+  object-fit: contain;  
   object-position: center;
   display: block;
-  transition: transform .4s ease;
+  border-radius: inherit;
 }
 
-/* Zoom sur l’image au hover */
-.project-card:hover .project-card__inner img {
-  transform: scale(1.06);
-}
-
-/* Masquer toutes les infos sous la card */
-.project-excerpt,
-.project-year,
-.project-description,
-.project-link {
-  display: none !important;
-}
-
-/* Titre (affiché seulement au survol) */
-.project-title {
+/* Titre overlay */
+.project-card__title {
   position: absolute;
   bottom: 12px;
   left: 12px;
-  margin: 0;
   padding: 6px 14px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0,0,0,0.7);
   color: #E3AB53;
+  font-family: "Cinzel", cursive;
   font-size: 1.15rem;
   border-radius: 4px;
   opacity: 0;
@@ -578,11 +553,11 @@ body.menu-open .hamburger span:nth-child(3) {
   pointer-events: none;
 }
 
-/* Titre visible au hover */
-.project-card:hover .project-title {
+.project-card:hover .project-card__title {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 /* ============================
    ARCHIVE (si nécessaire)
@@ -597,13 +572,18 @@ body.menu-open .hamburger span:nth-child(3) {
   color: #ccc;
 }
 
+.project-card--single {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+}
 
 /* ===========================
    SINGLE PROJET
 =========================== */
 
 .single-projet {
-  padding: 150px 40px 40px; /* espace sous header */
+  padding: 150px 40px 40px; 
   max-width: 1200px;
   margin: 0 auto;
   color: #fff;
@@ -619,28 +599,149 @@ body.menu-open .hamburger span:nth-child(3) {
 
 /* Colonne gauche */
 .projet-info {
-  flex: 0 0 40%;   /* largeur FIXE */
+  flex: 0 0 40%; 
 }
+
+/* Titre du projet */
+.projet-info .projet-titre {
+  color: #E3AB53;
+  font-family: "Cinzel", cursive;
+  font-size: 35px;
+}
+
+/* Labels SCF (Année, Description, Site…) */
+/* Labels SCF (Année, Description, Site…) */
+.project-year span,
+.project-description span,
+.project-link span {
+  color: #E3AB53;
+  font-family: "Cinzel", cursive;
+}
+
+/* Valeurs SCF */
+.project-year,
+.project-description,
+.project-link a {
+  color: #fff;
+}
+
+/* Labels en or */
+.project-link span {
+  color: #E3AB53;
+  font-family: "Cinzel", cursive;
+}
+
+/* Style des liens */
+.project-link a,
+.project-link-value a {
+  font-family: inherit !important;
+  font-weight: normal;
+  color: #fff;
+  text-decoration: none;
+}
+
+.project-link-value {
+  font-family: inherit !important;
+}
+
+/* Style du lien */
+.project-link-value a {
+  font-family: inherit !important;
+  font-weight: normal;
+  text-transform: lowercase !important;
+  color: #fff;
+  text-decoration: none;
+}
+
+.project-link-value a:hover {
+  color: #E3AB53;   
+  text-decoration: none;
+}
+/* ===== SECTION CONTACT SINGLE ===== */
+
+.single-contact-section {
+    width: 100%;
+    padding: 50px 0;
+    position: relative;
+    background: #000;
+    text-align: center;
+}
+
+/* Traits pleine largeur */
+.single-contact-section::before,
+.single-contact-section::after {
+    content: "";
+    display: block;
+    width: 100%;         
+    height: 1px;
+    background: #E3AB53;
+    margin: 0 auto;
+}
+
+.single-contact-section::before {
+    margin-bottom: 35px;
+}
+
+.single-contact-section::after {
+    margin-top: 35px;
+}
+
+/* Alignement horizontal */
+.single-contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* Textes */
+.single-contact-text {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 24px);
+    color: #E3AB53;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Icône encore plus fine */
+.single-contact-icon {
+    width: 48px;
+    height: 48px;
+    stroke: #E3AB53;
+    stroke-width: 0.7;   /* plus fin qu'avant */
+    opacity: 0.9;
+    transition: 0.3s ease;
+}
+
+.single-contact-link:hover .single-contact-icon {
+    opacity: 1;
+    stroke-width: 1.3;   /* reste fin même au hover */
+}
+
+
 
 /* Colonne droite (image) */
 .projet-image {
-  flex: 0 0 560px; /* largeur FIXE identique aux cards archive */
-  height: 430px;   /* idem archive */
-  border: 1px solid #E3AB53;
+  width: 100%;        
+  height: auto;
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .projet-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* ⚠️ même rendu que les cards */
+  object-position: center;
   display: block;
+  border-radius: 12px;
 }
+
 
 /* Trait */
 .projet-separateur {
@@ -728,3 +829,301 @@ body.menu-open .hamburger span:nth-child(3) {
   color: #E3AB53;
   text-decoration: none;
 }
+
+/* FORMATION */
+
+.experience-section {
+  padding: 80px 40px;
+  color: #fff;
+}
+
+.experience-title {
+  text-align: center;
+  font-family: "Cinzel", cursive;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #E3AB53;
+}
+
+.experience-block h3 {
+  color: #E3AB53;
+  font-family: "Cinzel", cursive;
+  margin-bottom: 10px;
+}
+
+.experience-container {
+  display: grid;
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.experience-block {
+  background: #0e0e0e;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #E3AB53;
+}
+
+/* ===== MODALE CONTACT ===== */
+
+body.modal-open {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+}
+
+.contact-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+}
+
+.contact-modal.active {
+    display: flex;
+}
+
+/* Overlay */
+.contact-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 999998
+}
+
+.contact-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 650px;   
+    min-height: 70vh;
+    padding: 40px;
+    border: 1px solid #E3AB53;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    color: #fff;
+    overflow: hidden;
+    z-index: 1000000 
+
+}
+
+.contact-modal-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill; 
+    z-index: 0;
+    opacity: 1;
+}
+
+
+/* Bouton fermer */
+.contact-modal-close {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    font-size: 32px;
+    background: none;
+    border: none;
+    color: #E3AB53;
+    cursor: pointer;
+    z-index: 5;
+    float: none !important;
+    display: block !important;
+    left: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Formulaire */
+.contact-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-modal-form h2 {
+    margin-top: -15px;        
+    font-size: 34px;          
+    letter-spacing: 0.5px;    
+    color: #E3AB53;
+    font-family: "Cinzel", serif;
+    text-align: center;  
+    width: 100%; 
+}
+
+.contact-modal-form,
+.contact-modal-close,
+.modal-submit {
+    position: relative;
+    z-index: 2;
+}
+/* Ligne nom/prenom */
+.modal-row {
+    display: flex;
+    gap: 15px;
+}
+
+.contact-modal-form input,
+.contact-modal-form textarea {
+    width: 100%;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #E3AB53;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Btn envoyer */
+
+.modal-submit {
+    display: inline-block;
+    width: auto;
+    padding: 10px 26px;
+    margin-top: 30px;
+
+    font-family: "Cinzel", serif;
+    font-size: 16px;
+    font-weight: 600;              /* texte un peu plus gras */
+    text-transform: uppercase;
+
+    color: #E3AB53;                /* texte or */
+    background: transparent;       /* fond transparent */
+    border: 1px solid #E3AB53;     /* fin et élégant */
+    
+    cursor: pointer;
+    transition: 0.3s ease;
+    align-self: center;
+}
+
+.modal-submit:hover {
+    background: #E3AB53;           /* fond or */
+    color: #000;                   /* texte noir */
+    border-color: #E3AB53;
+}
+
+/* Bouton ouvrir */
+.contact-modal-open {
+    padding: 10px 20px;
+    background: transparent;
+    color: #E3AB53;
+    border: 1px solid #E3AB53;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-modal-open:hover {
+    background: #E3AB53;
+    color: #000;
+}
+
+/* FOOTER */
+
+.site-footer {
+  background: #050505;
+  color: #f5f5f5;
+  padding: 3rem 1.5rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-col {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.footer-name {
+  font-size: 1.3rem;
+  margin: 0 0 0.3rem;
+  color: #E3AB53;
+  font-family: "Cinzel", serif;
+}
+
+.footer-tagline,
+.footer-location {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.footer-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.8rem;
+  color: #E3AB53;
+  font-family: "Cinzel", serif;
+}
+
+.footer-links,
+.footer-social,
+.footer-legal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.footer-social li,
+.footer-legal li {
+  margin-bottom: 0.4rem;
+}
+
+.footer-links a,
+.footer-social a,
+.footer-legal a,
+.footer-email a,
+.footer-cv a {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-social a:hover,
+.footer-legal a:hover,
+.footer-email a:hover,
+.footer-cv a:hover {
+ color: #E3AB53;
+}
+
+.footer-email {
+  margin-bottom: 0.8rem;
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+   border-top: none;
+}
+
+.footer-copy {
+  margin: 0;
+  opacity: 0.7;
+  color: #E3AB53;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1rem;
+}
+
+
+
