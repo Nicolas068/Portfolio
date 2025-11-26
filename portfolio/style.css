@@ -66,7 +66,7 @@ body > * {
   width: min(90vw, 1200px);
   aspect-ratio: 16/9;   /* évite le reflow pendant le chargement */
   z-index: 1;
-  animation: slideDown 1.6s ease-out forwards;
+  animation: slideDown 1s ease-out forwards;
   animation-delay: 200ms;
 }
 
@@ -134,7 +134,7 @@ body > * {
    font-family: "Cinzel", cursive;
     color: #E3AB53;
   z-index: 10;
-  margin-top: calc(min(90vw, 1200px) * 9/16 + 20px);
+  margin-top: calc(min(90vw, 1200px) * 9/16 + -60px);
   font-size: 2rem;
   opacity: 1;
   text-align: center;
@@ -149,9 +149,10 @@ body > * {
 
 .second-bg-img {
   display: block;
-  width: 100%;       
-  height: auto;       
+  width: 100%;
+  height: auto;
 }
+
 
 /* HEADER */
 .site-header {
@@ -328,7 +329,6 @@ body.menu-open .hamburger span:nth-child(3) {
   font-family: "Cinzel", cursive;
   color: #E3AB53;
   font-size: 1.2rem;
-  margin-top: 7%;
 }
 
 /* Lien vers /contact */
@@ -343,7 +343,6 @@ body.menu-open .hamburger span:nth-child(3) {
   fill: #ffffff;
    display: block;
   animation: vibrate 3.2s ease-in-out 2s infinite;
-  padding-top: 190%;
   stroke: #E3AB53;
   stroke-width: 10;   /* diminue l’épaisseur */
   fill: none;         /* retire le remplissage */
@@ -364,7 +363,9 @@ body.menu-open .hamburger span:nth-child(3) {
   transition: opacity 0.8s ease, transform 0.8s ease;
   font-family: "Cinzel", cursive;
     color: #E3AB53;
-    margin-top: 5%;
+    margin-top: 6%;
+    text-align: center;
+    font-size: 2.4rem;
 }
 
 .mes_services.is-visible {
@@ -375,7 +376,7 @@ body.menu-open .hamburger span:nth-child(3) {
 /* Conteneur */
 .services-scroll {
   position: absolute;        
-  top: 145%;                  
+  top: 150%;                  
   left: 60%;
   transform: translateX(-50%);
   width: 80%;                
@@ -455,7 +456,7 @@ body.menu-open .hamburger span:nth-child(3) {
   text-align: center;
   font-family: "Cinzel", cursive;
   font-size: 2.4rem;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   color: #E3AB53;
 }
 
@@ -487,6 +488,8 @@ body.menu-open .hamburger span:nth-child(3) {
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 40px;
+
 }
 
 #load-more-projets:hover {
@@ -592,7 +595,7 @@ body.menu-open .hamburger span:nth-child(3) {
 /* Partie haute : infos + image */
 .projet-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 40px;
 }
@@ -659,34 +662,41 @@ body.menu-open .hamburger span:nth-child(3) {
 }
 /* ===== SECTION CONTACT SINGLE ===== */
 
+/* SECTION CONTACT – commune single + archive */
 .single-contact-section {
     width: 100%;
-    padding: 50px 0;
-    position: relative;
+    padding: 90px 0;
     background: #000;
     text-align: center;
 }
 
-/* Traits pleine largeur */
+/* Traits pleine largeur de la section */
 .single-contact-section::before,
 .single-contact-section::after {
     content: "";
     display: block;
-    width: 100%;         
+    width: 100%;          /* prend toute la largeur de la section */
     height: 1px;
     background: #E3AB53;
     margin: 0 auto;
 }
 
 .single-contact-section::before {
-    margin-bottom: 35px;
+    margin-bottom: 35px;  /* espace entre trait haut et contenu */
 }
 
 .single-contact-section::after {
-    margin-top: 35px;
+    margin-top: 35px;     /* espace entre contenu et trait bas */
 }
 
-/* Alignement horizontal */
+/* Wrapper qui limite seulement le CONTENU, pas les traits */
+.single-contact-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Alignement horizontal du texte + icône */
 .single-contact-container {
     display: flex;
     align-items: center;
@@ -705,19 +715,27 @@ body.menu-open .hamburger span:nth-child(3) {
     white-space: nowrap;
 }
 
-/* Icône encore plus fine */
+/* Icône */
 .single-contact-icon {
     width: 48px;
     height: 48px;
     stroke: #E3AB53;
-    stroke-width: 0.7;   /* plus fin qu'avant */
+    stroke-width: 0.7;
     opacity: 0.9;
     transition: 0.3s ease;
 }
 
 .single-contact-link:hover .single-contact-icon {
     opacity: 1;
-    stroke-width: 1.3;   /* reste fin même au hover */
+    stroke-width: 1.3;
+}
+
+.archive-contact::before,
+.archive-contact::after {
+    max-width: 1200px;    /* même largeur que le contenu */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
@@ -757,7 +775,8 @@ body.menu-open .hamburger span:nth-child(3) {
 =========================== */
 
 .projets-suggestions h2 {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
   color: #E3AB53;
 }
 
@@ -830,6 +849,14 @@ body.menu-open .hamburger span:nth-child(3) {
   text-decoration: none;
 }
 
+#no-more-projets {
+    display: none;
+    margin-top: 20px;
+    color: #E3AB53;
+    font-family: "Cinzel", serif;
+    text-align: center;
+}
+
 /* FORMATION */
 
 .experience-section {
@@ -841,7 +868,8 @@ body.menu-open .hamburger span:nth-child(3) {
   text-align: center;
   font-family: "Cinzel", cursive;
   font-size: 2rem;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  margin-top: -10px;
   color: #E3AB53;
 }
 
@@ -1021,12 +1049,85 @@ body.modal-open {
     color: #000;
 }
 
+
+/* A PROPOS */
+
+.apropos {
+  background: #000;
+  padding: 100px 0 0;
+}
+
+/* CONTAINER DE L'IMAGE */
+.apropos__image-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* IMAGE AFFICHEE ENTIERE */
+.apropos__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* TITRE DANS L'IMAGE */
+.apropos__title {
+  position: absolute;
+  top: 70px;
+  left: 25px;
+  margin: 0;
+  font-size: 2.6rem;
+  font-family: "Cinzel", serif;
+  color: #E3AB53;
+}
+
+/* PORTRAIT DANS L'IMAGE (EN HAUT A DROITE) */
+.apropos__photo-wrap {
+  position: absolute;
+  top: 510px;
+  right: 25px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #E3AB53;
+}
+
+.apropos__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TEXTE SOUS L'IMAGE */
+
+.apropos__text {
+  position: absolute;
+  bottom: -23px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 95%;                 /* élargi le texte */
+  padding: 20px 25px;             /* espace intérieur */
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #fff;
+  z-index: 10;
+
+  /* FOND NOIR TRANSPARENT POUR LA LECTURE */
+  background: rgba(0, 0, 0, 0.6); /* opacité réglable */
+  border-radius: 8px;             /* coins arrondis */
+  backdrop-filter: blur(2px);     /* léger flou du fond (optionnel) */
+}
+
 /* FOOTER */
 
 .site-footer {
   background: #050505;
   color: #f5f5f5;
-  padding: 3rem 1.5rem 1.5rem;
+  padding: 0rem 1.5rem 1.5rem;
   font-size: 0.9rem;
 }
 
@@ -1045,7 +1146,7 @@ body.modal-open {
 
 .footer-name {
   font-size: 1.3rem;
-  margin: 0 0 0.3rem;
+  margin: 1 0 0.3rem;
   color: #E3AB53;
   font-family: "Cinzel", serif;
 }
@@ -1060,7 +1161,7 @@ body.modal-open {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin: 0 0 0.8rem;
+  margin: 1 0 0.8rem;
   color: #E3AB53;
   font-family: "Cinzel", serif;
 }
@@ -1125,5 +1226,75 @@ body.modal-open {
   gap: 1rem;
 }
 
+/* ===== PAGE MENTIONS LÉGALES ===== */
+.page-mentions-legales {
+  padding: 6rem 1.5rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #fff;
+  line-height: 1.8;
+}
 
+/* Titre */
+.page-mentions-legales h1 {
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+  color: #E3AB53;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* Sous-titres */
+.page-mentions-legales h2,
+.page-mentions-legales h3 {
+  font-family: "Cinzel", serif;
+  color: #E3AB53;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* Paragraphes */
+.page-mentions-legales p {
+  margin-bottom: 1.2rem;
+  opacity: 0.95;
+  font-size: 1.05rem;
+}
+
+/* Listes */
+.page-mentions-legales ul,
+.page-mentions-legales ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-mentions-legales li {
+  margin-bottom: .6rem;
+}
+
+/* Liens */
+.page-mentions-legales a {
+  color: #E3AB53;
+  text-decoration: none;
+  border-bottom: 1px solid #E3AB53;
+  transition: 0.3s ease;
+}
+
+.page-mentions-legales a:hover {
+  opacity: 0.7;
+}
+
+/* Mise en forme générale */
+.page-mentions-legales section {
+  margin-bottom: 2.5rem;
+}
+
+.page-mentions-legales hr {
+  border: none;
+  height: 2px;
+  background: #E3AB53;
+  width: 60%;
+  margin: 3rem auto;
+  opacity: 0.7;
+}
 

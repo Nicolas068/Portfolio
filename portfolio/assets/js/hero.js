@@ -58,7 +58,7 @@
 
     const wordsH1 = splitHTMLWords(h1.dataset.words || "");
     const wordsP = splitHTMLWords(p.dataset.words || "");
-    const WORD_DELAY = 380;
+    const WORD_DELAY = 210;
 
     function typeWords(el, words, onDone) {
       let i = 0;
@@ -117,9 +117,6 @@
         });
     }
   });
-  /* ===========================
-   ANIMATION SCROLL SERVICES
-=========================== */
 
 /* ===========================
    ANIMATION SCROLL SERVICES (RESET)

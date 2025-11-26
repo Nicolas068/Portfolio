@@ -1,24 +1,34 @@
 jQuery(function($){
 
-    /* ========== LOAD MORE ========== */
     $('#load-more-projets').on('click', function () {
+
         let button = $(this);
         let page = parseInt(button.attr('data-page'));
 
         $.ajax({
             url: loadmore.ajaxurl,
             type: 'POST',
-            data: { action: 'load_more_projets', page: page },
+            data: { 
+                action: 'load_more_projets',
+                page: page 
+            },
             success: function (response) {
+
                 if ($.trim(response) !== '') {
+
                     $('#projects-grid').append(response);
                     button.attr('data-page', page + 1);
+
                 } else {
-                    button.remove();
+                    button.remove();                // cacher le bouton
+                    $('#no-more-projets').fadeIn(); // afficher le message
                 }
             }
         });
+
     });
+
+});
 
 
     /* ========== MODALE CONTACT ========== */
@@ -52,4 +62,3 @@ jQuery(function ($) {
 });
 
 
-});

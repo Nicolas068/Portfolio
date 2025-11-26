@@ -1,24 +1,39 @@
-<?php get_header(); ?>
+<?php
+/*
+Template Name: À propos
+*/
+get_header();
 
-<section class="projects-section">
-    <h2 class="projects-title">Mes projets</h2>
+$img = get_template_directory_uri() . '/assets/img/apropos.jpg';
+?>
 
-    <div id="projects-grid">
-        <?php if (have_posts()) : ?>
-            <?php while (have_posts()) : the_post(); ?>
-                <?php get_template_part('template-parts/project-card'); ?>
-            <?php endwhile; ?>
-        <?php else : ?>
-            <p>Aucun projet pour le moment.</p>
-        <?php endif; ?>
+<section class="apropos">
+
+  <div class="apropos__image-container">
+
+    <!-- IMAGE -->
+    <img src="<?php echo esc_url($img); ?>" alt="" class="apropos__image">
+
+    <!-- TITRE DANS L'IMAGE -->
+    <h1 class="apropos__title"><?php the_title(); ?></h1>
+
+    <!-- PORTRAIT DANS L'IMAGE -->
+    <div class="apropos__photo-wrap">
+      <img 
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/portrait.jpg' ); ?>"
+        class="apropos__photo"
+        alt="Portrait"
+      >
     </div>
 
-    <div class="load-more-container">
-        <button id="load-more-projets" data-page="1">Charger plus</button>
-        <p id="no-more-projets">Pas d’autre projet pour le moment.</p>
+    <!-- TEXTE SUR L'IMAGE -->
+    <div class="apropos__text">
+      <?php while (have_posts()) : the_post(); the_content(); endwhile; ?>
     </div>
+
+  </div>
+
 </section>
-
 
 <section class="single-contact-section archive-contact">
     <div class="single-contact-wrapper">
@@ -42,6 +57,5 @@
 
     </div>
 </section>
-
 
 <?php get_footer(); ?>
