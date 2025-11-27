@@ -58,6 +58,13 @@
 
 
     <!-- AUTRES PROJETS -->
+
+    <nav class="single-projet-pagination">
+    <?php
+        previous_post_link('<span class="prev">%link</span>', '← Projet précédent');
+        next_post_link('<span class="next">%link</span>', 'Projet suivant →');
+    ?>
+</nav>
     <section class="projets-suggestions">
         <h2 class="projects-title">Autres projets</h2>
 

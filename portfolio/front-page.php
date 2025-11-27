@@ -164,10 +164,11 @@
       <p>5 ans d’expérience</p>
       <p>Maintenance, support utilisateurs, déploiement,gestion de parc, configuration,installation .</p>
       <h3>Diplôme et Formation</h3>
-      <p>2025 Développeur Worpdress OpenClassroom</p>
-      <p>2020 Technicien d'assistance en Informatique CRM Mulhouse</p>
-      <p>2019 Certification CISCO Essentiel IT</p>
-      <p>2019 Passeport de compétances informatique Européen </p>
+      <p> Développeur Worpdress (RNCP niveau 5) OpenClassroom - 2025</p>
+      <p>Technicien d'assistance en Informatique (RNCP niveau 4) CRM Mulhouse - 2020</p>
+      <p> Certification CISCO Essentiel IT 2019</p>
+      <p> Passeport de compétances informatique Européen - 2019 </p>
+      <p>BEP/CAP Installateur sanitaire (RNCP niveau 3) - 2001</p>
    </div>
   </div>
   

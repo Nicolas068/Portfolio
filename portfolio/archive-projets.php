@@ -1,20 +1,42 @@
-<?php get_header(); ?>
+<?php
+get_header();
+
+// Page actuelle
+$paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+// Query : 6 projets
+$args = [
+    'post_type'      => 'projets',
+    'posts_per_page' => 6,
+    'paged'          => $paged,
+    'orderby'        => 'date',
+    'order'          => 'DESC'
+];
+
+$query = new WP_Query($args);
+?>
 
 <section class="projects-section">
     <h2 class="projects-title">Mes projets</h2>
 
     <div id="projects-grid">
-        <?php if (have_posts()) : ?>
-            <?php while (have_posts()) : the_post(); ?>
+        <?php if ($query->have_posts()) : ?>
+            <?php while ($query->have_posts()) : $query->the_post(); ?>
                 <?php get_template_part('template-parts/project-card'); ?>
             <?php endwhile; ?>
         <?php else : ?>
             <p>Aucun projet pour le moment.</p>
         <?php endif; ?>
+
+        <?php wp_reset_postdata(); ?>
     </div>
 
     <div class="load-more-container">
-        <button id="load-more-projets" data-page="1">Charger plus</button>
+        <button id="load-more-projets"
+                data-page="1">
+            Charger plus
+        </button>
+
         <p id="no-more-projets">Pas d’autre projet pour le moment.</p>
     </div>
 </section>
@@ -42,6 +64,5 @@
 
     </div>
 </section>
-
 
 <?php get_footer(); ?>

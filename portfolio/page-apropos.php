@@ -33,6 +33,9 @@ $img = get_template_directory_uri() . '/assets/img/apropos.jpg';
 
   </div>
 
+  <!-- SIGNATURE DÉPLACÉE ICI -->
+  <p class="apropos__signature">Nicolas Heim</p>
+
 </section>
 
 <section class="single-contact-section archive-contact">
