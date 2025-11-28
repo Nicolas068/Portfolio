@@ -90,6 +90,21 @@
   </div>
 </footer>
 
+<!-- Bannière Cookies -->
+<div id="cookie-banner" class="cookie-banner">
+    
+    <p class="cookie-text">
+        Ce site utilise des cookies pour améliorer votre expérience.
+        <a href="/mentions-legales" class="cookie-link">En savoir plus</a>
+    </p>
+
+    <div class="cookie-buttons">
+        <button id="cookie-refuse" class="cookie-btn cookie-btn-refuse">Refuser</button>
+        <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accepter</button>
+    </div>
+
+</div>
+
 </body>
 
 

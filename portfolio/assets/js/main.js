@@ -1,5 +1,8 @@
 jQuery(function($){
 
+    /* ======================================
+       LOAD MORE PROJETS
+    ====================================== */
     $('#load-more-projets').on('click', function () {
 
         let button = $(this);
@@ -20,45 +23,76 @@ jQuery(function($){
                     button.attr('data-page', page + 1);
 
                 } else {
-                    button.remove();                // cacher le bouton
-                    $('#no-more-projets').fadeIn(); // afficher le message
+                    button.remove();                
+                    $('#no-more-projets').fadeIn();
                 }
             }
         });
 
     });
 
-});
 
 
-    /* ========== MODALE CONTACT ========== */
-jQuery(function ($) {
+    /* ======================================
+       MODALE CONTACT
+    ====================================== */
 
     console.log("main.js chargé ✔");
 
-    /* -------- OUVERTURE DE LA MODALE SUR TOUS LES LIENS CONTACT -------- */
+    // Ouverture modale
     $('a[href$="/contact"], a[href$="/contact/"], a[href*="contact"]').on('click', function (e) {
         e.preventDefault();
 
-        console.log("clic contact détecté ✔");
-
-        // 1. Fermer le menu plein écran si ouvert
         $('#menu-overlay').removeClass('active');
         $('body').removeClass('menu-open');
         $('.hamburger').removeClass('is-active');
 
-        // 2. Ouvrir la modale
         $('#contactModal').addClass('active');
-        $('body').addClass('modal-open'); // bloque le scroll
+        $('body').addClass('modal-open');
     });
 
-
-    /* -------- FERMETURE DE LA MODALE -------- */
+    // Fermeture modale
     $('.contact-modal-close, .contact-modal-overlay').on('click', function () {
         $('#contactModal').removeClass('active');
-        $('body').removeClass('modal-open'); // réactive le scroll
+        $('body').removeClass('modal-open');
     });
 
-});
 
+
+    /* ======================================
+       BANDEAU COOKIES
+    ====================================== */
+
+    const banner = document.getElementById("cookie-banner");
+const btnAccept = document.getElementById("cookie-accept");
+const btnRefuse = document.getElementById("cookie-refuse");
+
+if (banner && btnAccept && btnRefuse) {
+
+    // Déjà accepté ou refusé → on masque la bannière
+    if (
+        localStorage.getItem("cookies-accepted") === "true" ||
+        localStorage.getItem("cookies-refused") === "true"
+    ) {
+        banner.style.display = "none";
+    } else {
+        // 👉 Animation slide-up
+        setTimeout(() => {
+            banner.classList.add("visible");
+        }, 150);
+    }
+
+    // Accepter
+    btnAccept.addEventListener("click", function () {
+        localStorage.setItem("cookies-accepted", "true");
+        banner.style.display = "none";
+    });
+
+    // Refuser
+    btnRefuse.addEventListener("click", function () {
+        localStorage.setItem("cookies-refused", "true");
+        banner.style.display = "none";
+    });
+}
+});
 

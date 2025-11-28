@@ -308,7 +308,10 @@ body.menu-open .hamburger span:nth-child(3) {
     color: #E3AB53;
 }
 
-/* Conteneur centré */
+.presentation__text {
+  text-align: justify;
+}
+
 .presentation__icon {
   text-align: center;
   margin-top: 30px;
@@ -1144,19 +1147,28 @@ body.modal-open {
   bottom: -23px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 95%;                 /* élargi le texte */
-  padding: 20px 25px;             /* espace intérieur */
+  max-width: 95%;                 
+  padding: 47px 25px;             
   text-align: center;
   font-size: 1.2rem;
   line-height: 1.8;
   color: #fff;
   z-index: 10;
-
-  /* FOND NOIR TRANSPARENT POUR LA LECTURE */
-  background: rgba(0, 0, 0, 0.6); /* opacité réglable */
-  border-radius: 8px;             /* coins arrondis */
-  backdrop-filter: blur(2px);     /* léger flou du fond (optionnel) */
+  background: rgba(0, 0, 0, 0.6); 
+  border-radius: 8px;            
+  backdrop-filter: blur(2px);     
 }
+
+.apropos__image-container {
+    overflow: visible !important;
+
+}
+
+.apropos__text {
+    overflow: visible !important;
+    max-height: none !important;
+}
+
 
 /* FOOTER */
 
@@ -1336,9 +1348,6 @@ body.modal-open {
 
 /****** RESPONSIVE *****/
 
-/**********************************************
-   RESPONSIVE GLOBAL
-***********************************************/
 
 /* ===========================
    1) MOBILE — max-width: 480px
@@ -1451,6 +1460,113 @@ body.modal-open {
 }
 
 
+/* ============================
+   BANNIÈRE COOKIES FIXE
+============================ */
+
+.cookie-banner {
+    position: fixed;           /* FIXÉ en bas de l'écran */
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: rgba(0, 0, 0, 0.88);
+    border-top: 1px solid #E3AB53;
+
+    color: #fff;
+    padding: 18px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Cinzel", serif;
+    z-index: 999999;
+}
+
+/* Texte */
+.cookie-text {
+    margin: 0;
+    padding-right: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Lien */
+.cookie-link {
+    color: #E3AB53;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(227,171,83,0.4);
+}
+
+.cookie-link:hover {
+    opacity: 0.7;
+}
+
+/* Boutons */
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    padding: 8px 16px;
+    font-family: "Cinzel", serif;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 0.9rem;
+}
+
+/* Accepter */
+.cookie-btn-accept {
+    border: 1px solid #E3AB53;
+    background: transparent;
+    color: #E3AB53;
+}
+
+.cookie-btn-accept:hover {
+    background: #E3AB53;
+    color: #000;
+}
+
+/* Refuser */
+.cookie-btn-refuse {
+    border: 1px solid #666;
+    background: transparent;
+    color: #999;
+}
+
+.cookie-btn-refuse:hover {
+    background: #666;
+    color: #000;
+}
+
+.cookie-banner {
+    transform: translateY(100%);
+    transition: transform 0.45s ease-out;
+}
+
+.cookie-banner.visible {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .cookie-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
+
 /* ===========================
    2) TABLETTE — max-width: 768px
    ===========================*/
@@ -1539,3 +1655,379 @@ body.modal-open {
     font-size: 2.2rem;
   }
 }
+
+@media (max-width: 480px) {
+
+  .hero__text {
+    position: absolute;
+    top: 15%;                 /* monte encore le H1 */
+    left: 72%;                /* pousse plus à droite */
+    transform: translateX(-50%);
+
+    width: 135px;             /* cadre plus étroit */
+    max-width: 135px;
+    padding: 6px 10px;
+
+    font-size: 0.9rem;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .hero__subtext {
+    position: absolute;
+    top: 40%;                 /* descend sous le cadre */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+   .hero__text {
+    border: none;
+    padding: 0;
+  }
+
+  .hero__text.show-border {
+    border: none ;
+    padding: 0 ;
+}
+}
+
+/* ==== Correction du scroll horizontal mobile ==== */
+
+html, body {
+    overflow-x: hidden !important;
+}
+
+/* 1. Conteneurs principaux */
+@media (max-width: 480px) {
+  body > * {
+    width: 100% !important;
+  }
+}
+
+/* 2. Sections pouvant déborder via absolute */
+.hero,
+.site-header,
+.single-contact-section,
+.second-bg,
+.apropos__image-container {
+    overflow-x: hidden;
+}
+
+@media (max-width: 480px) {
+
+  .experience-title {
+    font-size: 1.5rem ;
+    line-height: 1.2 ;
+    text-align: center ;
+    white-space: normal ;
+    overflow-wrap: break-word ;
+    word-break: break-word ;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .from-left,
+  .from-right {
+    transform: translateX(0) ;
+  }
+
+  .service-block.visible {
+    transform: translateX(0) ;
+    opacity: 1 ;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Remonter la section À propos de moi */
+  .presentation {
+    margin-top: -270px;
+    padding-top: 20px;   
+    padding-bottom: 20px;
+  }
+
+  .presentation.show {
+    margin-top: -270x; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/* ============================
+   RESPONSIVE MES SERVICES
+   ============================ */
+
+   @media (max-width: 768px) {
+
+  /* On supprime l’image du flux proprement */
+  .second-bg-img {
+    display: none;
+    height: 0;
+    padding: 0;
+    margin: 0;
+     background: #111;             
+    padding-top: 3rem;            
+    padding-bottom: 3rem;
+  }
+
+  /* Le conteneur reprend une hauteur naturelle  */
+  .second-bg {
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
+    padding-bottom: 40px; /* espace propre sous la section */
+    overflow: visible;
+  }
+
+  /* Structure interne correcte */
+  .services-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 1.2rem;
+    position: relative;
+    z-index: 1;
+    background: #111;  
+  }
+
+  /* Bloc service */
+  .service-block {
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Titres */
+  .service-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Listes */
+  .service-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .service-block li {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: .6rem;
+  }
+
+  /* Désactivation clean des animations en mobile */
+  .from-left,
+  .from-right {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .presentation__icon-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .presentation__icon-text {
+    text-align: center;
+  }
+
+  .presentation__icon-link {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* Desktop : justification */
+@media (min-width: 769px) {
+  .presentation__text {
+    text-align: justify;
+  }
+}
+
+/* Mobile : pas de justification */
+@media (max-width: 768px) {
+  .presentation__text {
+    text-align: left;
+  }
+}
+
+/* ---- Mobile : carrousel horizontal ---- */
+@media (max-width: 768px) {
+
+  .projects-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0 2rem;
+    -webkit-overflow-scrolling: touch; /* iPhone smooth */
+  }
+
+  .projects-grid::-webkit-scrollbar {
+    display: none; /* enlève la barre de scroll */
+  }
+
+  .project-card {
+    flex: 0 0 80%;      /* largeur de chaque carte */
+    scroll-snap-align: center;
+  }
+
+  .single-projet-pagination {
+    display: none;
+}
+}
+
+
+
+/* ===============================
+     A PROPOS — RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+
+  
+  .apropos__image {
+    display: none;
+  }
+
+  .apropos__image-container {
+    position: static;
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .apropos__title,
+  .apropos__text,
+  .apropos__signature,
+  .apropos__photo-wrap {
+    position: static;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+
+ 
+  .apropos__title {
+    position: static;  
+    top: auto;         
+    left: auto;        
+    transform: none;   
+    margin-top: 2.5rem;  
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .apropos__text {
+    background: none; 
+    padding: 0;
+    max-width: 90%;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+
+  .apropos__signature {
+    text-align: center;
+    margin: 0 auto 1.5rem;
+    left: auto;
+    top: auto;
+  }
+
+  .apropos__photo-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #E3AB53;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    order: 10;
+  }
+
+  .apropos__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .apropos {
+    padding: 2rem 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  }
+
+
+  /* MONDAL */
+
+ @media (max-width: 768px) {
+
+  /* ===== CROIX ===== */
+  .contact-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 1.8rem;
+    color: #E3AB53;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* ===== FORMULAIRE EN MODE MOBILE ===== */
+  .contact-modal-form {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* Nom & Prénom l’un SOUS l’autre */
+  .modal-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* Tous les champs 100% largeur */
+  .contact-modal-form input,
+  .contact-modal-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Texte plus lisible en mobile */
+  .contact-modal-form input,
+  .contact-modal-form textarea {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  /* Bouton centré */
+  .modal-submit {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
